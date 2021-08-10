@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake and Laddders</title>
+    <!-- <link href="assets/css.css" rel="stylesheet"/>
+    <script src="assets/js.js"></script> -->
+    <style>
+
+body
+{
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    font-family: Roboto black ;
+    text-transform: uppercase;
+}
+#header
+{
+    position: relative;
+    text-align: center;
+    background-color: mediumaquamarine;
+    border-bottom: 2px solid maroon;
+    font-size: larger;
+    font-weight: 900;
+    padding-top: 20px;
+}
+#dice
+{
+    position: relative;
+    left: 90%;
+    top: 30px;
+    width: 110px;
+    background-color: orangered;
+    height: 110px;
+    border: 2px solid white;
+    
+}
+
+#side1,#side2,#side3,#side4,#side5,#side6{
+    /* display: flex; */
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    color: transparent; text-shadow: 0 0 0 white;
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+}
+#clickMe
+{
+    margin-top: 39px;
+    margin-left: 5px;
+    color: white;
+    text-shadow: 3px 3px 3px black;
+    font-size: 30px;
+    /* display: none; */
+    font-weight: 900;
+    cursor: grab;
+    content: none;
+    user-select: none;
+}
+#side1:hover,#side2:hover,#side3:hover,#side4:hover,#side5:hover,#side6:hover{
+    cursor: grab;
+    content: none;
+    user-select: none;
+}
+#dice
+{
+    border: 3px solid black;
+    border-radius: 30px;
+}
+#dice:active {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+  }
+
+  #board
+  {
+      position: relative;
+     
+      margin: auto;
+      margin-top: -50px;
+      width: 590px;
+      height: 590px;
+      color: black;
+      display: grid;
+      grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% ;
+      grid-template-rows:  10% 10% 10% 10% 10% 10% 10% 10% 10% 10% ;
+
+  }
+  .box 
+  {
+    
+    padding-left: 2px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid  darkgreen;
+    background-color:#66CDAA;
+  }
+  .dot
+  {
+      display: flex;
+      margin-left: 10px;
+      display: none;
+      color: transparent;  
+      font-size: 20px;
+      text-shadow: 4px 3px 0 darkblue;
+        /* border: 10px solid black; */
+  }
+  
+  /* .box10 > .dot{
+      display: block;
+  }  */
+
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-10deg); }
+    20% { transform: translate(-3px, 0px) rotate(10deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(10deg); }
+    50% { transform: translate(-1px, 2px) rotate(-10deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-10deg); }
+    80% { transform: translate(-1px, -1px) rotate(10deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-10deg); }
+  }
+
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        SNAKE AND LADDER GAME
+    </div>
+    <div id="dice" onclick="rollDice()" >
+        
+        <div id="clickMe">Click</div>
+        <div id="side1" hidden>⚫</div>
+        <div id="side2"  hidden>&nbsp⚫&nbsp⚫</div>
+        <div id="side3"  hidden>&nbsp⚫&nbsp⚫&nbsp⚫</div>
+        <div id="side4"  hidden>&nbsp⚫&nbsp⚫<br>&nbsp⚫&nbsp⚫</div>
+        <div id="side5" hidden>&nbsp⚫&nbsp⚫<br>&nbsp&nbsp&nbsp&nbsp⚫<br>&nbsp⚫&nbsp⚫</div>
+        <div id="side6" hidden>&nbsp⚫&nbsp⚫&nbsp⚫<br>&nbsp⚫&nbsp⚫&nbsp⚫</div>
+        
+    </div>
+    <div id="board">
+        <div class="box"  id="box100">100
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box99">99
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box98">98
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box97">97
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box96">96
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box95">95
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box94">94
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box93">93
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box92">92
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box91">91
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box90">90
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box89">89
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box88">88
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box87">87
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box86">86
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box85">85
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box84">84
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box83">83
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box82">82
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box81">81
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box80">80
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box79">79
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box78">78
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box77">77
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box76">76
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box75">75
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box74">74
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box73">73
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box72">72
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box71">71
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box70">70
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box69">69
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box68">68
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box67">67
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box66">66
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box65">65
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box64">64
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box63">63
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box62">62
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box61">61
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box60">60
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box59">59
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box58">58
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box57">57
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box56">56
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box55">55
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box54">54
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box53">53
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box52">52
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box51">51
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box50">50
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box49">49
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box48">48
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box47">47
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box46">46
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box45">45
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box44">44
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box43">43
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box42">42
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box41">41
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box40">40
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box39">39
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box38">38
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box37">37
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box36">36
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box35">35
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box34">34
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box33">33
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box32">32
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box31">31
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box30">30
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box29">29
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box28">28
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box27">27
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box26">26
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box25">25
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box24">24
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box23">23
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box22">22
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box21">21
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box20">20
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box19">19
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box18">18
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box17">17
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box16">16
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box15">15
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box14">14
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box13">13
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box12">12
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box" id="box11">11
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box10">10
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box9">9
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box8">8
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box7">7
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box6">6
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box5">5
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box4">4
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box3">3
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box2">2
+            <div class="dot">⚫</div>
+        </div>
+        <div class="box"  id="box1">1
+            <div class="dot">⚫</div>
+        </div>
+    </div>    
+</body>
+
+<script>
+
+snakes={}
+ladder={}
+
+count=0;
+position=1;
+
+function onReferesh()
+{
+
+    createSnakes()
+    createLadders()
+    
+    for(key in ladder)
+    {
+        var b="box"+key;
+        var b1="box"+ladder[key];
+           
+        //    console.log(b);
+        document.getElementById(b).style.backgroundColor = "yellow";
+        document.getElementById(b).style.color = "black";
+        // document.getElementById(b1).style.backgroundColor = "orange";
+        document.getElementById(b).innerHTML=document.getElementById(b).innerHTML + " ⇈ " +ladder[key] +"<br><span style='font-size:13px;'>LADDER</span>"
+        
+    }
+    
+    for(key in snakes)
+    {
+        var b="box"+key;
+        var b1="box"+snakes[key];
+           
+        //    console.log(b);
+        document.getElementById(b).style.backgroundColor = "red";
+        document.getElementById(b).style.color = "black";
+        // document.getElementById(b1).style.backgroundColor = "maroon";
+        document.getElementById(b).innerHTML=document.getElementById(b).innerHTML + " ⇊ " +snakes[key] +"<br><span style='font-size:13px;'> &nbspSNAKE</span>"
+        
+    }
+    
+
+}
+window.addEventListener('load', function () {
+    onReferesh()
+    document.getElementsByClassName("dot")[100-position].style.display="block";
+    })
+
+
+function createSnakes()
+{
+    console.log(document.getElementsByClassName("box").length)
+    while(Object.keys(snakes).length !=6)
+    {
+        pos=Math.floor(Math.random()*100%80)+20
+        moveTo=Math.floor(Math.random()*(100)%(pos-10))+2;
+        snakes[pos]=moveTo;
+    }
+    console.log( snakes)
+}
+function createLadders()
+{
+    while(Object.keys(ladder).length !=6)
+    {
+        
+        pos=Math.floor(Math.random()*100%50)+10
+        moveTo=Math.floor(Math.random()%(pos))+(100-(pos))
+        flag=true
+        for (const [key, value] of Object.entries(snakes)) {
+            if(key in snakes && ( key == pos || key==moveTo ))
+            {
+                flag=false;
+                break;
+            }
+        }
+        if(flag)
+        {
+            ladder[pos]=moveTo;
+        }
+    }
+    console.log( ladder)
+}
+
+
+
+
+function rollDice(){
+
+   document.getElementById("clickMe").hidden=true;
+   
+        var side=Math.floor(Math.random()*100%6)+1
+        
+        for (i=1;i<=6;i++)
+        {
+            if(i==side)
+            {
+            
+                count++;
+                document.getElementById("side"+i).style.display="flex"; 
+                document.getElementById("side"+i).hidden=false;
+                document.getElementById("dice").style.pointerEvents="none"
+            }
+            else{
+                document.getElementById("side"+i).style.display="none"; 
+                document.getElementById("side"+i).hidden=true;
+               
+            }
+            console.log("side"+side+"---->"+document.getElementById("side"+side))
+    
+    
+           
+            setTimeout(()=>{
+                for(i=1;i<=6;i++)
+                {
+                        document.getElementById("side"+i).style.display="none"; 
+                        document.getElementById("side"+i).hidden=true;      
+                }
+                document.getElementById("clickMe").hidden=false;
+                document.getElementById("dice").style.pointerEvents="auto"
+                
+    
+    
+            
+            },1500)
+        }
+        document.getElementsByClassName("dot")[100-position].style.display="";
+                
+        if(position==1){
+            position=position+side-1;
+        }
+        else{
+            position=position+side
+        }
+        if(position>=100)
+        {
+            document.getElementById("dice").style.pointerEvents="none"
+            document.getElementsByClassName("dot")[100-100+1].style.display="";
+            setTimeout(()=>{
+                document.getElementById("board").style.display="none"
+                document.write("<div style=' font-size: 50px; margin-left:400px; margin-top:200px; background-color: mediumaquamarine;padding:30px 00px 30px 60px;'>Congratulations You Won in "+count+" Steps ! <br><span style='font-size:30px;'>Press F5 to  play again ! </span> </div>")    
+            },1500)
+        }
+        else
+        {
+            ladderFlag=false;
+            ladderMoveTo=0;
+            snakeFalg=false;
+            snakeMoveTo=0;
+            for(keys in snakes)
+            {
+                if(keys==position)
+                {
+                    snakeFalg=true
+                    snakeMoveTo=snakes[keys]
+                    
+                    console.log(keys +"--------> "+snakes[keys])
+                    break;
+                }
+            }
+            for(keys in ladder)
+            {
+                if(keys==position)
+                {
+                    ladderFlag=true
+                    ladderMoveTo=ladder[keys]
+                    console.log(keys +"--------> "+ladder[keys])
+                    break;
+                }
+            }
+            if(ladderFlag)
+            {
+             
+                document.getElementsByClassName("dot")[100-position].style.display="block";
+                setTimeout(()=>
+                {
+                    document.getElementsByClassName("dot")[100-position].style.display="";   
+                    position=ladderMoveTo;
+                    document.getElementsByClassName("dot")[100-position].style.display="block";
+                },1000)
+            
+            }
+            else if(snakeFalg)
+            {
+                document.getElementsByClassName("dot")[100-position].style.display="block";
+                setTimeout(()=>
+                {
+                    document.getElementsByClassName("dot")[100-position].style.display="";   
+                    position=snakeMoveTo;
+                    document.getElementsByClassName("dot")[100-position].style.display="block";
+                },1000)
+           
+            }
+            else{  
+                document.getElementsByClassName("dot")[100-position].style.display="block";
+            }    
+        }     
+}
+
+</script>
+</html>
